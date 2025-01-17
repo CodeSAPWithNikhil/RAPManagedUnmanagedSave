@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service defn'
+define service ZC_ACC_ITEMS_CUSTOMER_SD {
+  expose zc_acc_items_customer as accoutingItems;
+  expose zc_block_reason       as blockText;
+}

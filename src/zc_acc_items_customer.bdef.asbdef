@@ -1,0 +1,22 @@
+managed implementation in class zbp_c_acc_items_customer unique;
+
+strict ( 2 );
+
+define behavior for zc_acc_items_customer alias _AccItems
+with unmanaged save
+etag master ClearingCreationDate
+lock master
+authorization master ( instance )
+
+{
+  update;
+  field ( readonly ) AccountingDocument, ClearingCreationDate, CompanyCode, FiscalYear, PaymentBlockingReasonName, Customer, ClearingDate;
+  action setBlock result [1] $self;
+  action releaseBlock result [1] $self;
+  validation validateBlockReason on save { field PaymentBlockingReason; }
+  side effects
+  {
+    field PaymentBlockingReason affects field PaymentBlockingReasonName;
+
+  }
+}
